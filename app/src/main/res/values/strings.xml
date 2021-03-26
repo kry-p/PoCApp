@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PoCApp</string>
+    <string name="mock_text_history">내역 Fragment</string>
+    <string name="mock_text_property">자산 Fragment</string>
+    <string name="tab_history">내역</string>
+    <string name="tab_property">자산</string>
 </resources>
