@@ -5,12 +5,26 @@
     android:layout_height="match_parent"
     tools:context=".fragments.PropertyFragment">
 
-    <com.github.mikephil.charting.charts.PieChart
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/piechart">
+        android:layout_height="match_parent">
 
-    </com.github.mikephil.charting.charts.PieChart>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/addPopup">
+        </com.github.mikephil.charting.charts.PieChart>
+
+        <Button
+            android:id="@+id/addPopup"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:text="값 추가"/>
+
+    </RelativeLayout>
 
 </FrameLayout>
 

@@ -1,5 +1,6 @@
 package com.grabber.pocapp.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -17,18 +19,21 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.grabber.pocapp.AddPopup;
 import com.grabber.pocapp.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PropertyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PropertyFragment extends Fragment {
+public class PropertyFragment extends Fragment implements View.OnClickListener{
 
     PieChart pieChart;
+    Button addPopup;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,8 +82,14 @@ public class PropertyFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_property, container, false);
 
-        pieChart = (PieChart)v.findViewById(R.id.piechart);
+        // add view
+        pieChart = v.findViewById(R.id.pieChart);
+        addPopup = v.findViewById(R.id.addPopup);
 
+        // add listener
+        addPopup.setOnClickListener(this);
+
+        // set pie chart
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5,10,5,5);
@@ -91,13 +102,11 @@ public class PropertyFragment extends Fragment {
 
         ArrayList<PieEntry> yValues = new ArrayList<>();
 
-
         yValues.add(new PieEntry(23f,"USA"));
         yValues.add(new PieEntry(14f,"UK"));
         yValues.add(new PieEntry(35f,"India"));
         yValues.add(new PieEntry(40f,"Russia"));
         yValues.add(new PieEntry(40f,"Korea"));
-
 
         Description description = new Description();
 
@@ -126,5 +135,13 @@ public class PropertyFragment extends Fragment {
         pieChart.setData(data);
 
         return v;
+    }
+
+    // Actions when clicking elements
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.addPopup && getActivity()!=null) {
+            Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), AddPopup.class));
+        }
     }
 }
