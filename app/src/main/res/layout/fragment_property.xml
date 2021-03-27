@@ -5,9 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".fragments.PropertyFragment">
 
-    <TextView
+    <com.github.mikephil.charting.charts.PieChart
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/mock_text_property" />
+        android:id="@+id/piechart">
+
+    </com.github.mikephil.charting.charts.PieChart>
 
 </FrameLayout>
+
