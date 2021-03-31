@@ -4,7 +4,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import java.sql.Date;
+import com.grabber.pocapp.database.module.RoomTypeConverter;
 
 @Entity(tableName = "prop")
 public class Prop {
@@ -14,40 +14,56 @@ public class Prop {
     private int id;
     private String category;
     @TypeConverters({RoomTypeConverter.class})
-    private Date date;
+    private int year;
+    private int month;
     private long amount;
 
     // 생성자
-    public Prop(String category, Date date, long amount){
+    public Prop(String category, int year, int month, long amount) {
         this.category = category;
-        this.date = date;
+        this.year = year;
+        this.month = month;
         this.amount = amount;
     }
 
     // getter, setter
-    public int getId(){
+    public int getId() {
         return id;
     }
-    public String getCategory(){
+
+    public String getCategory() {
         return category;
     }
-    public Date getDate(){
-        return date;
+
+    public int getYear() {
+        return year;
     }
-    public long getAmount(){
+
+    public int getMonth() {
+        return month;
+    }
+
+    public long getAmount() {
         return amount;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
-    public void setCategory(String in){
-        this.category = in;
+
+    public void setCategory(String category) {
+        this.category = category;
     }
-    public void setDate(Date date){
-        this.date = date;
+
+    public void setYear(int year) {
+        this.year = year;
     }
-    public void setAmount(long value){
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public void setAmount(long value) {
         this.amount = value;
     }
 }

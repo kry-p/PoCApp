@@ -1,13 +1,36 @@
 <resources>
     <string name="app_name">PoCApp</string>
-    <string name="mock_text_history">내역 Fragment</string>
-    <string name="mock_text_property">자산 Fragment</string>
     <string name="tab_history">내역</string>
     <string name="tab_property">자산</string>
     <string name="title_activity_add_popup">AddPopup</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">Hello Square World!</string>
+
+    <!-- Property Fragment Strings -->
+    <string name="property_title">자산 정보</string>
+    <string name="property_add">값 추가</string>
+
+    <!-- History Fragment Strings -->
+    <string name="history_title">월별 정보</string>
+    <string name="history_prev_month">←</string>
+    <string name="history_next_month">→</string>
+    <string name="history_delimiter">/</string>
+    <string name="history_search">검색</string>
+    <string name="history_property">자산</string>
+    <string name="history_hint_year">2021</string>
+    <string name="history_hint_month">3</string>
+
+    <!-- Add Popup Strings -->
+    <string name="popup_year">년</string>
+    <string name="popup_month">월</string>
+    <string name="popup_amount">금액</string>
+    <string name="popup_won">원</string>
+    <string name="popup_cancel">취소</string>
+    <string name="popup_add">추가</string>
+    <string name="popup_hint_year">예) 2020</string>
+    <string name="popup_hint_month">예) 12</string>
+    <string name="popup_hint_category">예) 현금</string>
+    <string name="popup_hint_amount">예) 50,000</string>
+
+    <!-- Common Strings -->
+    <string name="common_category">분류</string>
+
 </resources>

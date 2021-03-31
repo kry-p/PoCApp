@@ -1,8 +1,9 @@
-package com.grabber.pocapp.database;
+package com.grabber.pocapp.database.module;
 
 import androidx.room.TypeConverter;
 import java.sql.Date;
 
+// Timestamp(DB) <-> Date(Java)
 public class RoomTypeConverter {
     @TypeConverter
     public static Date fromTimestamp(Long value) {

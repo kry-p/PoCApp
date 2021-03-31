@@ -7,6 +7,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.grabber.pocapp.database.module.RoomTypeConverter;
+
 // 3개의 테이블을 포함(Budget, NearbySites, Stamp)
 @Database(entities = {Prop.class}, version = 1, exportSchema = false)
 @TypeConverters({RoomTypeConverter.class})

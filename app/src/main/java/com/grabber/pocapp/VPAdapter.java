@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.grabber.pocapp.fragments.HistoryFragment;
-import com.grabber.pocapp.fragments.PropertyFragment;
+import com.grabber.pocapp.fragment.HistoryFragment;
+import com.grabber.pocapp.fragment.PropertyFragment;
 
 import java.util.ArrayList;
 

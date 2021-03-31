@@ -1,221 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.HistoryFragment">
+    tools:context=".fragment.HistoryFragment">
 
-
-    <TableLayout
+    <TextView
+        android:id="@+id/txtHistoryTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/table_outside"
-        android:stretchColumns="*"
-        >
+        android:layout_height="wrap_content"
+        android:text="@string/history_title"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
-        <TableRow
+    <LinearLayout
+        android:id="@+id/layoutControlPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtHistoryTitle"
+        android:layout_margin="2dp"
+        android:orientation="horizontal">
 
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btnPrevMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/history_prev_month" />
+
+        <EditText
+            android:id="@+id/txtYear"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight = "0.5"
-            >
+            android:layout_weight="3"
+            android:inputType="number"
+            android:hint="@string/history_hint_year"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="시벌1...."
-                android:textSize="20sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/history_delimiter"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="시벌2...."
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="시벌3...."
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="시벌4...."
-                android:textSize="20sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/txtMonth"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight = "1" >
+            android:layout_weight="2"
+            android:inputType="number"
+            android:hint="@string/history_hint_month"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="1시벌1...."
-                android:textSize="20sp" />
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/history_search" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="1시벌2...."
-                android:textSize="20sp" />
+        <Button
+            android:id="@+id/btnNextMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/history_next_month" />
+    </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="1시벌3...."
-                android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutTableTop"
+        android:layout_below="@+id/layoutControlPanel">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="1시벌4...."
-                android:textSize="20sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="@string/common_category"/>
 
-        </TableRow>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="@string/history_property"/>
 
-        <TableRow
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutTableTop">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight = "1" >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:descendantFocusability="blocksDescendants">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="2시벌1...."
-                android:textSize="20sp" />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/category_view"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="2시벌2...."
-                android:textSize="20sp" />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/prev_month_view"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="2시벌3...."
-                android:textSize="20sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/current_month_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="2시벌4...."
-                android:textSize="20sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight = "1" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="3시벌1...."
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="3시벌2...."
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="3시벌3...."
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="3시벌4...."
-                android:textSize="20sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight = "1" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="4시벌1...."
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="4시벌2...."
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="4시벌3...."
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/table_inside"
-                android:gravity="center"
-                android:text="4시벌4...."
-                android:textSize="20sp" />
-
-        </TableRow>
-
-    </TableLayout>
-
-</FrameLayout>
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/next_month_view"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1" />-->
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

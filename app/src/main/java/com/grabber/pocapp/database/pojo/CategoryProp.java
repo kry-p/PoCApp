@@ -1,4 +1,4 @@
-package com.grabber.pocapp.database;
+package com.grabber.pocapp.database.pojo;
 
 public class CategoryProp {
 

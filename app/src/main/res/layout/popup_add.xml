@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,20 +19,40 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="18sp"
-            android:text="날짜"/>
-        <TextView
-            android:id="@+id/TxtInputDate"
+            android:text="@string/popup_year"/>
+
+        <EditText
+            android:id="@+id/TxtInputYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="4" />
+            android:layout_weight="9"
+            android:inputType="number"
+            android:hint="@string/popup_hint_year"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
         <TextView
-            android:id="@+id/TxtInputTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:layout_weight="5" />
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:text="@string/popup_month"/>
+
+        <EditText
+            android:id="@+id/TxtInputMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:inputType="number"
+            android:hint="@string/popup_hint_month"/>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -47,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="18sp"
-            android:text="분류"/>
+            android:text="@string/common_category"/>
 
         <EditText
             android:id="@+id/TxtInputType"
@@ -55,7 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="9"
             android:ems="10"
-            android:inputType="text" />
+            android:inputType="text"
+            android:hint="@string/popup_hint_category"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="18sp"
-            android:text="금액" />
+            android:text="@string/popup_amount" />
 
         <EditText
             android:id="@+id/TxtInputAmount"
@@ -77,15 +97,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="9"
             android:ems="10"
-            android:gravity="right"
-            android:inputType="number" />
+            android:gravity="end"
+            android:inputType="number"
+            android:hint="@string/popup_hint_amount"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="18sp"
-            android:text="원"/>
+            android:text="@string/popup_won"/>
 
     </LinearLayout>
     <LinearLayout
@@ -98,13 +119,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:text="취소" />
+            android:text="@string/popup_cancel"
+            style="?android:attr/borderlessButtonStyle" />
 
         <Button
             android:id="@+id/BtnInsert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="추가" />
+            android:text="@string/popup_add"
+            style="?android:attr/borderlessButtonStyle" />
     </LinearLayout>
 
 </LinearLayout>
