@@ -128,6 +128,7 @@ public class PropertyFragment extends Fragment implements View.OnClickListener{
 
         pieChart.notifyDataSetChanged();
         pieChart.setData(data);
+
     }
 
     // 카테고리별 데이터를 받아 차트에 반영

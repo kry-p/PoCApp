@@ -85,6 +85,13 @@
             android:textAlignment="center"
             android:text="@string/history_property"/>
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="재훈재훈"/>
+
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
