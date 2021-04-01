@@ -18,7 +18,12 @@ import com.grabber.pocapp.adapter.CurrentMonthAdapter;
 import com.grabber.pocapp.database.AppDatabase;
 import com.grabber.pocapp.database.pojo.CategoryProp;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -33,9 +38,10 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
     private AppDatabase db;
     private CurrentMonthAdapter categoryAdapter;
     private EditText edtYear, edtMonth;
-    private Button btnSearch;
+    private Button btnSearch, btnPrev, btnNext;
     private List<CategoryProp> categoryProps;
     private int year, month;
+    private GregorianCalendar today;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
@@ -72,6 +78,7 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
+        today = new GregorianCalendar();
     }
 
     @Override
@@ -88,8 +95,12 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
         edtYear = v.findViewById(R.id.txtYear);
         edtMonth = v.findViewById(R.id.txtMonth);
         btnSearch = v.findViewById(R.id.btnSearch);
+        btnPrev = v.findViewById(R.id.btnPrevMonth);
+        btnNext = v.findViewById(R.id.btnNextMonth);
 
         btnSearch.setOnClickListener(this);
+        btnPrev.setOnClickListener(this);
+        btnNext.setOnClickListener(this);
 
         // initialize layout manager
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -99,6 +110,11 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
         currentMonthView.setLayoutManager(layoutManager);
         categoryAdapter = new CurrentMonthAdapter(db);
         currentMonthView.setAdapter(categoryAdapter);
+
+        // set default value
+        edtYear.setText(String.format(Locale.getDefault(), "%d", today.get(Calendar.YEAR)));
+        edtMonth.setText(String.format(Locale.getDefault(), "%d", today.get(Calendar.MONTH)));
+        getData();
 
         return v;
     }
@@ -123,17 +139,48 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
         try {
             year = Integer.parseInt(edtYear.getText().toString());
             month = Integer.parseInt(edtMonth.getText().toString());
-
             getUpdate();
         } catch (Exception e) {
             Log.e("Parser", "Date parsing error");
         }
     }
 
+    public void setYearMonth() {
+        try {
+            year = Integer.parseInt(edtYear.getText().toString());
+            month = Integer.parseInt(edtMonth.getText().toString());
+        } catch (Exception e) {
+            Log.e("Parser error", "set to default (current year, month of year)");
+            edtYear.setText(String.format(Locale.getDefault(), "%d", today.get(Calendar.YEAR)));
+            edtMonth.setText(String.format(Locale.getDefault(), "%d", today.get(Calendar.MONTH)));
+        }
+    }
+
     // 요소 클릭 시 Listener
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btnSearch) {
+        int id = v.getId();
+
+        if (id == R.id.btnSearch) {
+            getData();
+        } else if (id == R.id.btnPrevMonth || id == R.id.btnNextMonth) {
+            if (id == R.id.btnPrevMonth) {
+                setYearMonth();
+                if (month <= 1) {
+                    edtYear.setText(String.format(Locale.getDefault(), "%d", year -= 1));
+                    edtMonth.setText(String.format(Locale.getDefault(), "%d", 12));
+                } else {
+                    edtMonth.setText(String.format(Locale.getDefault(), "%d", month -= 1));
+                }
+            } else if (id == R.id.btnNextMonth) {
+                setYearMonth();
+                if (month >= 12) {
+                    edtYear.setText(String.format(Locale.getDefault(), "%d", year += 1));
+                    edtMonth.setText(String.format(Locale.getDefault(), "%d", 1));
+                } else {
+                    edtMonth.setText(String.format(Locale.getDefault(), "%d", month += 1));
+                }
+            }
             getData();
         }
     }
