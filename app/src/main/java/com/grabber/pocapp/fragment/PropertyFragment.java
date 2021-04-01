@@ -119,6 +119,7 @@ public class PropertyFragment extends Fragment implements View.OnClickListener {
     }
 
     // Pie 차트를 다시 그림
+    // 카테고리별 데이터를 받아 차트에 반영
     private void draw() {
         ExecutorService executor = Executors.newSingleThreadExecutor();
 
@@ -150,18 +151,6 @@ public class PropertyFragment extends Fragment implements View.OnClickListener {
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
         }
-    }
-
-    // 카테고리별 데이터를 받아 차트에 반영
-    private synchronized void setData() {
-        new Thread(() -> {
-            yValues = new ArrayList<>();
-            List<CategoryProp> temp = db.propDao().getByCategory();
-
-            for (CategoryProp item : temp) {
-                yValues.add(new PieEntry((float) (item.getAmount()), item.getCategory()));
-            }
-        }).start();
     }
 
     // Actions when clicking elements
