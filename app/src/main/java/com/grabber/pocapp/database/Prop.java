@@ -13,7 +13,6 @@ public class Prop {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String category;
-    @TypeConverters({RoomTypeConverter.class})
     private int year;
     private int month;
     private long amount;

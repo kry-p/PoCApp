@@ -28,16 +28,20 @@ public interface PropDao {
     LiveData<List<Prop>> getAll();
 
     // 카테고리에 따라 가져오기
-    @Query("SELECT SUM(amount) as sum_amount, category FROM prop GROUP BY category")
+    @Query("SELECT SUM(amount) as sum_amount, category, year, month FROM prop GROUP BY category")
     List<CategoryProp> getByCategory();
 
     // 카테고리에 따라 가져오기(특정 년월)
-    @Query("SELECT SUM(amount) as sum_amount, category FROM prop WHERE year=:year AND month=:month GROUP BY category")
+    @Query("SELECT SUM(amount) as sum_amount, category, year, month FROM prop WHERE year=:year AND month=:month GROUP BY category")
     List<CategoryProp> getAllCategoryDuration(int year, int month);
 
     // 입력한 단어를 조회
     @Query("SELECT * FROM prop WHERE category=:str")
     LiveData<List<Prop>> getSearchData(String str);
+
+    // 연, 월이 일치하는 특정 카테고리만 삭제
+    @Query("DELETE FROM prop WHERE category=:category AND year=:year AND month=:month")
+    void delete(String category, int year, int month);
 
     // 모두 삭제
     @Query("DELETE FROM prop")

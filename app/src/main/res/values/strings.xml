@@ -15,6 +15,7 @@
     <string name="history_delimiter">/</string>
     <string name="history_search">검색</string>
     <string name="history_property">자산</string>
+    <string name="history_action">동작</string>
     <string name="history_hint_year">2021</string>
     <string name="history_hint_month">3</string>
 
@@ -29,6 +30,9 @@
     <string name="popup_hint_month">예) 12</string>
     <string name="popup_hint_category">예) 현금</string>
     <string name="popup_hint_amount">예) 50,000</string>
+
+    <!-- RecyclerView Strings -->
+    <string name="rv_delete">삭제</string>
 
     <!-- Common Strings -->
     <string name="common_category">분류</string>

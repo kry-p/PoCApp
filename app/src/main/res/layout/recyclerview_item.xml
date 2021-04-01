@@ -7,7 +7,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-
         android:textSize="16sp"
         android:textAlignment="center">
     </TextView>
@@ -17,17 +16,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-
         android:textSize="16sp"
         android:textAlignment="center">
     </TextView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/rv_delete"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="삭제" />
-
+        android:text="@string/rv_delete" />
 
 </LinearLayout>
