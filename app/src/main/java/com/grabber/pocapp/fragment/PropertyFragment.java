@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +28,16 @@ import com.grabber.pocapp.database.Prop;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PropertyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PropertyFragment extends Fragment implements View.OnClickListener{
+public class PropertyFragment extends Fragment implements View.OnClickListener {
 
     private AppDatabase db;
 
@@ -57,6 +61,7 @@ public class PropertyFragment extends Fragment implements View.OnClickListener{
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
+     *
      * @return A new instance of fragment PropoertyFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -82,7 +87,7 @@ public class PropertyFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_property, container, false);
+        View v = inflater.inflate(R.layout.fragment_property, container, false);
 
         // initialize db
         db = AppDatabase.getDatabase(getActivity());
@@ -97,7 +102,7 @@ public class PropertyFragment extends Fragment implements View.OnClickListener{
         // set pie chart
         pieChart.setUsePercentValues(false);
         pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5,10,5,5);
+        pieChart.setExtraOffsets(5, 10, 5, 5);
 
         pieChart.setDragDecelerationFrictionCoef(0.95f);
 
@@ -114,31 +119,47 @@ public class PropertyFragment extends Fragment implements View.OnClickListener{
     }
 
     // Pie 차트를 다시 그림
-    private void draw(){
-        setData();
-        PieDataSet dataSet = new PieDataSet(yValues, "");
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+    private void draw() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
 
-        data = new PieData((dataSet));
-        data.notifyDataChanged();
-        data.setValueTextSize(10f);
-        data.setValueTextColor(Color.BLACK);
+        Runnable getUpdate = () -> {
+            yValues = new ArrayList<>();
+            List<CategoryProp> temp = db.propDao().getByCategory();
 
-        pieChart.notifyDataSetChanged();
-        pieChart.setData(data);
+            for (CategoryProp item : temp) {
+                yValues.add(new PieEntry((float) (item.getAmount()), item.getCategory()));
+            }
+        };
 
+        Future<?> future = executor.submit(getUpdate);
+
+        try {
+            future.get();
+            PieDataSet dataSet = new PieDataSet(yValues, "");
+            dataSet.setSliceSpace(3f);
+            dataSet.setSelectionShift(5f);
+            dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+
+            data = new PieData((dataSet));
+            data.notifyDataChanged();
+            data.setValueTextSize(10f);
+            data.setValueTextColor(Color.BLACK);
+
+            pieChart.notifyDataSetChanged();
+            pieChart.setData(data);
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
+        }
     }
 
     // 카테고리별 데이터를 받아 차트에 반영
-    private synchronized void setData(){
-        new Thread(()->{
+    private synchronized void setData() {
+        new Thread(() -> {
             yValues = new ArrayList<>();
-            List<CategoryProp> temp=db.propDao().getByCategory();
+            List<CategoryProp> temp = db.propDao().getByCategory();
 
-            for(CategoryProp item:temp){
-                yValues.add(new PieEntry((float)(item.getAmount()), item.getCategory()));
+            for (CategoryProp item : temp) {
+                yValues.add(new PieEntry((float) (item.getAmount()), item.getCategory()));
             }
         }).start();
     }
@@ -146,7 +167,7 @@ public class PropertyFragment extends Fragment implements View.OnClickListener{
     // Actions when clicking elements
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.addPopup && getActivity()!=null) {
+        if (v.getId() == R.id.addPopup && getActivity() != null) {
             Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), AddPopup.class));
         }
     }
