@@ -36,5 +36,7 @@
 
     <!-- Common Strings -->
     <string name="common_category">분류</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>
