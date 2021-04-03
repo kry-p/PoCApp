@@ -5,13 +5,9 @@
     android:padding="@dimen/widget_margin"
     android:theme="@style/ThemeOverlay.PoCApp.AppWidgetContainer">
 
-
-
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/widgetPieChart"
+    <ImageView
+        android:id="@+id/widgetImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/addPopup">
-    </com.github.mikephil.charting.charts.PieChart>
+        android:layout_height="match_parent"/>
+
 </RelativeLayout>
